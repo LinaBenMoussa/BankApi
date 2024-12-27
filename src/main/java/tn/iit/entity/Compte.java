@@ -26,7 +26,6 @@ public class Compte implements Serializable {
     @Column(nullable = false)
     private float solde;
 
-    // Association par ID uniquement
     @Column(name = "client_id", nullable = false)
     private Integer clientId;
 
