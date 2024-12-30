@@ -1,5 +1,6 @@
 package tn.iit.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tn.iit.entity.Client;
 import tn.iit.repository.ClientRepository;
@@ -9,11 +10,8 @@ import java.util.Optional;
 
 @Service
 public class ClientService {
-    private final ClientRepository clientRepository;
-
-    public ClientService(ClientRepository clientRepository) {
-        this.clientRepository = clientRepository;
-    }
+    @Autowired
+    private ClientRepository clientRepository;
 
     public Client saveClient(Client client) {
         return clientRepository.save(client);

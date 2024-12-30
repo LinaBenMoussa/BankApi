@@ -1,5 +1,6 @@
 package tn.iit.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tn.iit.entity.Client;
@@ -10,18 +11,14 @@ import java.util.List;
 @RestController
 @RequestMapping("/clients")
 public class ClientController {
-
-    private final ClientService clientService;
-
-    public ClientController(ClientService clientService) {
-        this.clientService = clientService;
-    }
+    @Autowired
+    private ClientService clientService;
 
     @PostMapping("/create")
     public ResponseEntity<Client> createClient(@RequestBody Client client) {
-        System.out.println("client: "+client.getEmail());
+
         Client savedClient = clientService.saveClient(client);
-        System.out.println("savedClient: "+savedClient.getEmail());
+
         return ResponseEntity.ok(savedClient);
     }
 

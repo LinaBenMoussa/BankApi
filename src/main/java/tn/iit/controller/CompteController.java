@@ -1,5 +1,6 @@
 package tn.iit.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tn.iit.entity.Compte;
@@ -10,12 +11,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/comptes")
 public class CompteController {
-
-    private final CompteService compteService;
-
-    public CompteController(CompteService compteService) {
-        this.compteService = compteService;
-    }
+    @Autowired
+    private CompteService compteService;
 
     @PostMapping
     public ResponseEntity<Compte> createCompte(@RequestBody Compte compte) {

@@ -20,9 +20,6 @@ public class Compte implements Serializable {
     @EqualsAndHashCode.Include
     private Integer rib;
 
-    @Column(name = "nom_client", nullable = false)
-    private String nom;
-
     @Column(nullable = false)
     private float solde;
 
