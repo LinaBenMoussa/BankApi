@@ -23,6 +23,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter
     private JwtToPrincipleConverter jwtToPrincipleConverter;
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+        String requestPath = request.getServletPath();
+        if ("/auth/login".equals(requestPath)) {
+            filterChain.doFilter(request, response);
+            return;
+        }
         extractTokenFromRequest(request)
                         .map(jwtDecoder::decode)
                         .map(jwtToPrincipleConverter::convert)

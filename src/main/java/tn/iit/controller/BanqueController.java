@@ -14,6 +14,7 @@ public class BanqueController {
 
     @PostMapping("/create")
     public Banque createBanque(@RequestBody Banque banque) {
-        return banqueService.createBanque(banque.getNom(), banque.getEmail(),banque.getPassword());
+        return banqueService.createBanque(banque.getNom(), banque.getEmail(), banque.getPassword());
     }
 }
+
