@@ -7,6 +7,7 @@ import tn.iit.entity.Compte;
 import tn.iit.service.CompteService;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/comptes")
@@ -42,5 +43,10 @@ public class CompteController {
     public ResponseEntity<Void> deleteCompte(@PathVariable Integer id) {
         compteService.deleteCompte(id);
         return ResponseEntity.noContent().build();
+    }
+    @PutMapping
+    public ResponseEntity<Optional<Compte>> updateCompte(@RequestBody Compte compte) {
+        Optional<Compte> updatedCompte = compteService.updateCompte(compte);
+        return ResponseEntity.ok(updatedCompte);
     }
 }

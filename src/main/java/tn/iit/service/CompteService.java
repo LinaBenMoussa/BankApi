@@ -32,4 +32,24 @@ public class CompteService {
     }
 
     public List<Compte> getAllComptes(){return compteRepository.findAll();}
+
+    public Optional<Compte> updateCompte( Compte compte) {
+
+        Optional<Compte> existingCompteOptional = compteRepository.findById(compte.getRib());
+
+        if (existingCompteOptional.isPresent()) {
+
+            Compte existingCompte = existingCompteOptional.get();
+
+
+            existingCompte.setSolde(compte.getSolde());  // Exemple de mise à jour
+            existingCompte.setClientId(compte.getClientId());
+
+            return Optional.of(compteRepository.save(existingCompte));
+        } else {
+
+            return Optional.empty();
+        }
+    }
+
 }
