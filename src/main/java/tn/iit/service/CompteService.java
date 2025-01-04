@@ -1,15 +1,22 @@
 package tn.iit.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tn.iit.dto.ComptesWithClientDto;
 import tn.iit.entity.Compte;
+import tn.iit.repository.ClientRepository;
 import tn.iit.repository.CompteRepository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class CompteService {
     private final CompteRepository compteRepository;
+
+    @Autowired
+    private ClientRepository clientRepository;
 
     public CompteService(CompteRepository compteRepository) {
         this.compteRepository = compteRepository;
@@ -61,6 +68,22 @@ public class CompteService {
             throw new RuntimeException("Erreur lors de la suppression des comptes pour clientId: " + clientId, e);
         }
     }
+    public List<ComptesWithClientDto> getAllComptesWithClients() {
+        List<Compte> comptes = compteRepository.findAll();
 
+        return comptes.stream().map(compte -> {
+            ComptesWithClientDto dto = new ComptesWithClientDto();
+            dto.setRib(compte.getRib());
+            dto.setSolde(compte.getSolde());
+
+
+            clientRepository.findById(compte.getClientId()).ifPresent(client -> {
+                dto.setClientId(client.getId());
+                dto.setNomClient(client.getPrenom()+" " +client.getNom());
+            });
+
+            return dto;
+        }).collect(Collectors.toList());
+    }
 
 }

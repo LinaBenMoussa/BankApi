@@ -3,6 +3,7 @@ package tn.iit.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import tn.iit.dto.ComptesWithClientDto;
 import tn.iit.entity.Compte;
 import tn.iit.service.CompteService;
 
@@ -28,8 +29,8 @@ public class CompteController {
                 .orElse(ResponseEntity.notFound().build());
     }
     @GetMapping
-    public ResponseEntity<List<Compte>> getAllComptes() {
-        List<Compte> comptes = compteService.getAllComptes();
+    public ResponseEntity<List<ComptesWithClientDto>> getAllComptes() {
+        List<ComptesWithClientDto> comptes = compteService.getAllComptesWithClients();
         return ResponseEntity.ok(comptes);
     }
 
