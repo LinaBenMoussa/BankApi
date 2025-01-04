@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.*;
 import tn.iit.entity.Client;
 import tn.iit.service.ClientService;
 import lombok.*;
+import tn.iit.service.CompteService;
+
 import java.util.List;
 
 @RestController
@@ -14,6 +16,9 @@ import java.util.List;
 public class ClientController {
     @Autowired
     private ClientService clientService;
+
+    @Autowired
+    private CompteService compteService;
 
     @PostMapping("/create")
     public ResponseEntity<Client> createClient(@RequestBody Client client) {
@@ -38,6 +43,7 @@ public class ClientController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteClient(@PathVariable Integer id) {
+        compteService.deleteCompteByClientId(id);
         clientService.deleteClient(id);
         return ResponseEntity.noContent().build();
     }

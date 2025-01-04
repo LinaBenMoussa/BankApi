@@ -51,5 +51,16 @@ public class CompteService {
             return Optional.empty();
         }
     }
+    public void deleteCompteByClientId(Integer clientId) {
+        try {
+            List<Compte> banques = compteRepository.findByClientId(clientId);
+            if (banques != null && !banques.isEmpty()) {
+                compteRepository.deleteAll(banques);
+            }
+        } catch (Exception e) {
+            throw new RuntimeException("Erreur lors de la suppression des comptes pour clientId: " + clientId, e);
+        }
+    }
+
 
 }
