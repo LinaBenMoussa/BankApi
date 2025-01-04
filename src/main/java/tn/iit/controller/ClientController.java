@@ -40,6 +40,19 @@ public class ClientController {
         List<Client> clients = clientService.getAllClients();
         return ResponseEntity.ok(clients);
     }
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Client> updateClient(@PathVariable Integer id, @RequestBody Client clientDetails) {
+        return clientService.getClientById(id)
+                .map(existingClient -> {
+                    existingClient.setNom(clientDetails.getNom());
+                    existingClient.setPrenom(clientDetails.getPrenom());
+                    // Ajoutez d'autres champs à mettre à jour ici
+                    Client updatedClient = clientService.saveClient(existingClient);
+                    return ResponseEntity.ok(updatedClient);
+                })
+                .orElse(ResponseEntity.notFound().build());
+    }
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteClient(@PathVariable Integer id) {
