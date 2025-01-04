@@ -30,4 +30,6 @@ public class CompteService {
     public void deleteCompte(Integer id) {
         compteRepository.deleteById(id);
     }
+
+    public List<Compte> getAllComptes(){return compteRepository.findAll();}
 }

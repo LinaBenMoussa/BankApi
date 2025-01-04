@@ -26,6 +26,11 @@ public class CompteController {
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
+    @GetMapping
+    public ResponseEntity<List<Compte>> getAllComptes() {
+        List<Compte> comptes = compteService.getAllComptes();
+        return ResponseEntity.ok(comptes);
+    }
 
     @GetMapping("/client/{clientId}")
     public ResponseEntity<List<Compte>> getComptesByClientId(@PathVariable Integer clientId) {
