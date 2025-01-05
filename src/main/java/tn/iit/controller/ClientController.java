@@ -60,4 +60,9 @@ public class ClientController {
         clientService.deleteClient(id);
         return ResponseEntity.noContent().build();
     }
+    @GetMapping("/count")
+    public ResponseEntity<Long> getClientCount() {
+        long clientCount = clientService.countClients();
+        return ResponseEntity.ok(clientCount);
+    }
 }
