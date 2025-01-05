@@ -85,5 +85,7 @@ public class CompteService {
             return dto;
         }).collect(Collectors.toList());
     }
-
+    public long countComptes() {
+        return compteRepository.count();
+    }
 }

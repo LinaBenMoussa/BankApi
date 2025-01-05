@@ -50,4 +50,9 @@ public class CompteController {
         Optional<Compte> updatedCompte = compteService.updateCompte(compte);
         return ResponseEntity.ok(updatedCompte);
     }
+    @GetMapping("/count")
+    public ResponseEntity<Long> getCompteCount() {
+        long comptesCount = compteService.countComptes();
+        return ResponseEntity.ok(comptesCount);
+    }
 }
