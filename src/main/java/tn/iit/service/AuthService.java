@@ -1,6 +1,7 @@
 package tn.iit.service;
 
 import lombok.Getter;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -26,7 +27,6 @@ public class AuthService {
         );
         SecurityContextHolder.getContext().setAuthentication(authentication);
         var principle=(UserPrinciple) authentication.getPrincipal();
-        System.out.println("email"+principle);
         var token=jwtIssuer.issue(principle.getUserId(), principle.getEmail());
         return
                 LoginResponseDto.builder()
